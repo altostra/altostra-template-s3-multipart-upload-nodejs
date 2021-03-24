@@ -6,6 +6,7 @@
   "includes": [
     "/functions/**",
     "/src/**",
+    "/tests/**",
     "/package*.json",
     "/.altoignore",
     "/.gitignore",
