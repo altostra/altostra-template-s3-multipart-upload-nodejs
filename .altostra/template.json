@@ -1,0 +1,157 @@
+{
+  "id": "s3-multipart-upload-nodejs",
+  "name": "s3-multipart-upload-nodejs",
+  "description": "S3 multipart upload template",
+  "created": "2021-03-23T14:22:29Z",
+  "includes": [
+    "/functions/**",
+    "/src/**",
+    "/package*.json",
+    "/.altoignore",
+    "/.gitignore",
+    "/README.md",
+    "/LICENSE"
+  ],
+  "excludes": [],
+  "blueprints": [
+    {
+      "id": "s3-multipart-upload-nodejs",
+      "name": "s3-multipart-upload-nodejs",
+      "version": "2019-10-24",
+      "connections": {
+        "ApiEndpoint01": {
+          "StartUpload01": {
+            "type": "connection.trigger",
+            "from": "ApiEndpoint01",
+            "to": "StartUpload01"
+          }
+        },
+        "UploadHandler01": {},
+        "ApiEndpoint02": {
+          "CompleteUpload01": {
+            "type": "connection.trigger",
+            "from": "ApiEndpoint02",
+            "to": "CompleteUpload01"
+          }
+        },
+        "StartUpload01": {
+          "Files01": {
+            "type": "connection.resource-access",
+            "accessLevel": "write-only",
+            "from": "StartUpload01",
+            "to": "Files01"
+          }
+        },
+        "CompleteUpload01": {
+          "Files01": {
+            "type": "connection.resource-access",
+            "accessLevel": "write-only",
+            "from": "CompleteUpload01",
+            "to": "Files01"
+          }
+        }
+      },
+      "resources": {
+        "Api01": {
+          "type": "resource.api",
+          "name": "api",
+          "cors": {
+            "type": "api.cors.none"
+          },
+          "endpoints": [
+            {
+              "type": "ref",
+              "id": "ApiEndpoint01"
+            },
+            {
+              "type": "ref",
+              "id": "ApiEndpoint02"
+            }
+          ],
+          "id": "Api01"
+        },
+        "Files01": {
+          "type": "resource.file-store",
+          "name": "files",
+          "accessLevel": "private",
+          "filesSources": [
+            {
+              "path": "files",
+              "type": "files-source.project-dir"
+            }
+          ],
+          "id": "Files01"
+        },
+        "ApiEndpoint01": {
+          "type": "resource.api.endpoint",
+          "name": "api-endpoint-0",
+          "method": "POST",
+          "path": "/file/upload",
+          "api": {
+            "type": "ref",
+            "id": "Api01"
+          },
+          "id": "ApiEndpoint01"
+        },
+        "StartUpload01": {
+          "type": "resource.compute.function",
+          "name": "start-upload",
+          "entryPoint": "functions/start-upload.handler",
+          "memory": 512,
+          "runtime": "nodejs12.x",
+          "timeout": 20,
+          "id": "StartUpload01",
+          "layers": []
+        },
+        "CompleteUpload01": {
+          "type": "resource.compute.function",
+          "name": "complete-upload",
+          "entryPoint": "functions/complete-upload.handler",
+          "memory": 512,
+          "runtime": "nodejs12.x",
+          "timeout": 6,
+          "id": "CompleteUpload01",
+          "layers": []
+        },
+        "ApiEndpoint02": {
+          "type": "resource.api.endpoint",
+          "name": "api-endpoint-1",
+          "method": "PUT",
+          "path": "/file/upload",
+          "api": {
+            "type": "ref",
+            "id": "Api01"
+          },
+          "id": "ApiEndpoint02"
+        }
+      },
+      "metadata": {
+        "designer": {
+          "resourcePositions": {
+            "Api01": {
+              "x": 155,
+              "y": 226,
+              "z": 0
+            },
+            "Files01": {
+              "x": 818,
+              "y": 270,
+              "z": 0
+            },
+            "StartUpload01": {
+              "x": 504,
+              "y": 230,
+              "z": 0
+            },
+            "CompleteUpload01": {
+              "x": 504,
+              "y": 311,
+              "z": 0
+            }
+          }
+        }
+      },
+      "unsafe": false
+    }
+  ]
+}

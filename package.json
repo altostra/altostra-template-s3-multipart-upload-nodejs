@@ -1,0 +1,20 @@
+{
+  "name": "altostra-template-s3-multipart-upload-nodejs",
+  "version": "1.0.0",
+  "description": "S3 multipart upload template",
+  "scripts": {
+    "test:local": "mocha tests/local-integ.js",
+    "test:remote": "mocha tests/remote-integ.js"
+  },
+  "repository": "https://github.com/altostra/altostra-template-s3-multipart-upload-nodejs.git",
+  "keywords": [],
+  "author": "Altostra, Inc.",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "aws-sdk": "^2.870.0",
+    "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "cuid": "^2.1.8"
+  }
+}
