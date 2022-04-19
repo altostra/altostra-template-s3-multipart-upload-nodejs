@@ -1,4 +1,5 @@
 {
+  "type": "altostra",
   "id": "s3-multipart-upload-nodejs",
   "name": "s3-multipart-upload-nodejs",
   "description": "S3 multipart upload template",
