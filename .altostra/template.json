@@ -57,8 +57,9 @@
           "type": "resource.api",
           "name": "api",
           "cors": {
-            "type": "api.cors.none"
-          },
+						"type": "api.cors.simple",
+						"origins": "*"
+					},
           "endpoints": [
             {
               "type": "ref",
