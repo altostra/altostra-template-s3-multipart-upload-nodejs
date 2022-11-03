@@ -100,7 +100,7 @@
           "name": "start-upload",
           "entryPoint": "functions/start-upload.handler",
           "memory": 512,
-          "runtime": "nodejs12.x",
+          "runtime": "nodejs16.x",
           "timeout": 20,
           "id": "StartUpload01",
           "layers": []
@@ -110,7 +110,7 @@
           "name": "complete-upload",
           "entryPoint": "functions/complete-upload.handler",
           "memory": 512,
-          "runtime": "nodejs12.x",
+          "runtime": "nodejs16.x",
           "timeout": 6,
           "id": "CompleteUpload01",
           "layers": []
